@@ -1,0 +1,45 @@
+{
+  "name": "onBoarding",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "express": "^4.14.0",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.22.0",
+    "nodemon": "^1.10.0",
+    "path": "^0.12.7",
+    "postcss-color-function": "^2.0.1",
+    "postcss-custom-properties": "^5.0.1",
+    "postcss-loader": "^0.9.1",
+    "postcss-nested": "^1.0.0",
+    "react": "^15.3.0",
+    "react-semantify": "^0.5.2",
+    "semantic-ui": "^2.2.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2"
+  },
+  "dependencies": {
+    "babel-cli": "^6.11.4",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  }
+}
