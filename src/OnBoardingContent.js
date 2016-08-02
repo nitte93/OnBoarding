@@ -14,11 +14,11 @@ class OnBoardingContent extends Component{
     renderMenu:PropTypes.element
   }
   render(){
-    const {data} = this.props
-    const element = "<div className='ui centered column'>Title for topic1</div>";
+    const {content} = this.props
+    console.log(content);
     return(
       <div className="content">
-          <OnBoardingContentElement renderMenu = {element}></OnBoardingContentElement>
+          <OnBoardingContentElement renderMenu = {content}></OnBoardingContentElement>
       </div>
     )
   }

@@ -45,8 +45,8 @@ class OnBoarding extends Component {
 
 
   render(){
-    const {children, title, filter, limit} = this.props
-
+    const {children, title, subtitle, filter, limit, content} = this.props
+    console.log(content);
     return(
       <div>
         <div className="ui main containers">
@@ -54,9 +54,9 @@ class OnBoarding extends Component {
          <div className="ui modal newOnboarding">
 
                 <i className="close icon"></i>
-                <OnBoardingHeader title="SomeTitle" subTitle="Some subTitle"></OnBoardingHeader>
+                <OnBoardingHeader title={title} subTitle={subtitle}></OnBoardingHeader>
 
-                <OnBoardingContent></OnBoardingContent>
+                <OnBoardingContent content = {content}></OnBoardingContent>
                 <div className="actions">
                     <div className="ui positive left labeled icon button">
                       Pre
@@ -69,12 +69,6 @@ class OnBoarding extends Component {
                 </div>
 
           </div>
-            <Grid className="stackable three column centered container">
-              <Column className="sixteen wide center aligned">
-                <Divider className="hidden"/>
-                <input type='text'/>
-              </Column>
-            </Grid>
       </div>
 
 

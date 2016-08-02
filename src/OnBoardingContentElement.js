@@ -10,18 +10,17 @@ class OnBoardingContentElement extends Component{
   render(){
     const {renderMenu} = this.props
     var contentData = [];
-    for(var i =0; i< 6; i++){
-      contentData.push(renderMenu);
-    }
-    console.log(contentData, this.props);
+    renderMenu.forEach(function(item, index, array){
+      console.log(item);
+      item.data.forEach(function(item1, index, array){
+          console.log(item.renderComponent);
+          contentData.push(<item.renderComponent key={index} {...item1}/>);
+      })
+    });
     return(
         <div>
         <div className="ui four column centered grid">
           {contentData}
-          <div className='ui centered column'>Title for topic1</div>
-          <div className='ui centered column'>Title for topic1</div>
-          <div className='ui centered column'>Title for topic1</div>
-          <div className='ui centered column'>Title for topic1</div>
         </div>
       </div>
     )
