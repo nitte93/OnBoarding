@@ -14,11 +14,10 @@ class OnBoardingContent extends Component{
     renderMenu:PropTypes.element
   }
   render(){
-    const {content} = this.props
-    console.log(content);
+    const {content, displayContent} = this.props
     return(
       <div className="content">
-          <OnBoardingContentElement renderMenu = {content}></OnBoardingContentElement>
+          <OnBoardingContentElement renderMenu = {content} displayContent={displayContent}></OnBoardingContentElement>
       </div>
     )
   }

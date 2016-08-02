@@ -9,71 +9,44 @@ import {
 } from "react-semantify"
 import OnBoardingHeader from './onboardingHeader';
 import OnBoardingContent from './OnBoardingContent';
+import OnBoardingSkeleton from './OnBoardingSkeleton';
 require('../semantic-ui/dist/semantic.min.css');
 require('../semantic-ui/dist/semantic.min.js');
 
-
-class OnBoarding extends Component {
+var OnBoarding  = ComposedComponent => class extends Component{
   constructor(props){
-    super(props);
+    super(props)
 
-    this.openModal = this.openModal.bind(this);
-  }
-  static propTypes = {
-    title:PropTypes.string,
-    subtitle:PropTypes.string,
-    children:PropTypes.element,
-    limit:PropTypes.number,
-    next:PropTypes.func,
-    pre:PropTypes.func,
-    content:PropTypes.array,
-  };
-
-  static defaultProps = {
-    title: 'Onboarding title',
-    subtitle:'Onboarding subtitle',
-    next:() => console.log('next'),
-    pre:() => console.log('pre'),
-
+    this.state = {
+      index:this.props.index || 0,
+      displayContent:this.props.content[0]
+    }
+    this.showNext = this.showNext.bind(this);
+    this.showPrevious = this.showPrevious.bind(this);
+    this.initialContent = this.initialContent.bind(this);
   }
 
-  openModal(){
-    $('.ui.modal.newOnboarding')
-      .modal('show')
-    ;
+  componentDidMount(){
+    var displayContent;
   }
-
-
+  showNext(){
+    const tempIndex = this.state.index + 1;
+    this.setState({index:tempIndex, displayContent:this.props.content[tempIndex]});
+  }
+  showPrevious(){
+    const tempIndex = this.state.index? this.state.index - 1 : 0;
+    this.setState({index:tempIndex, displayContent:this.props.content[tempIndex]});
+  }
+  initialContent(...args){
+    // console.log(arguments[0][arguments[1]]);
+    this.setState({displayContent:arguments[0][arguments[1]]});
+  }
   render(){
-    const {children, title, subtitle, filter, limit, content} = this.props
-    console.log(content);
+    const {title, subtitle, content, limit, index = 0} = this.props
     return(
-      <div>
-        <div className="ui main containers">
-         <div onClick={this.openModal}>Open Modal</div>
-         <div className="ui modal newOnboarding">
-
-                <i className="close icon"></i>
-                <OnBoardingHeader title={title} subTitle={subtitle}></OnBoardingHeader>
-
-                <OnBoardingContent content = {content}></OnBoardingContent>
-                <div className="actions">
-                    <div className="ui positive left labeled icon button">
-                      Pre
-                      <i className="left arrow icon"></i>
-                    </div>
-                    <div className="ui positive right labeled icon button">
-                      Next
-                      <i className="right arrow icon"></i>
-                    </div>
-                </div>
-
-          </div>
-      </div>
-
-
-    </div>
+      <ComposedComponent  {...this.props} displayContent = {this.state.displayContent} next={this.showNext} pre={this.showPrevious} />
     )
   }
 }
-export default OnBoarding
+
+export default OnBoarding(OnBoardingSkeleton)
