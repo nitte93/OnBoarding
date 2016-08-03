@@ -7,8 +7,6 @@ import {
   Divider,
   Button
 } from "react-semantify"
-import OnBoardingHeader from './onboardingHeader';
-import OnBoardingContent from './OnBoardingContent';
 import OnBoardingSkeleton from './OnBoardingSkeleton';
 require('../semantic-ui/dist/semantic.min.css');
 require('../semantic-ui/dist/semantic.min.js');
@@ -19,7 +17,8 @@ var OnBoarding  = ComposedComponent => class extends Component{
 
     this.state = {
       index:this.props.index || 0,
-      displayContent:this.props.content[0]
+      displayContent:this.props.content[0],
+      limit:this.props.limit?this.props.limit-1:this.props.content.length-1
     }
     this.showNext = this.showNext.bind(this);
     this.showPrevious = this.showPrevious.bind(this);
@@ -30,7 +29,7 @@ var OnBoarding  = ComposedComponent => class extends Component{
     var displayContent;
   }
   showNext(){
-    const tempIndex = this.state.index + 1;
+    const tempIndex = this.state.index<this.state.limit?this.state.index + 1:this.state.limit;
     this.setState({index:tempIndex, displayContent:this.props.content[tempIndex]});
   }
   showPrevious(){
@@ -42,6 +41,7 @@ var OnBoarding  = ComposedComponent => class extends Component{
     this.setState({displayContent:arguments[0][arguments[1]]});
   }
   render(){
+    console.log(this.state);
     const {title, subtitle, content, limit, index = 0} = this.props
     return(
       <ComposedComponent  {...this.props} displayContent = {this.state.displayContent} next={this.showNext} pre={this.showPrevious} />

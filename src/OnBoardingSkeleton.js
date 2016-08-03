@@ -7,8 +7,8 @@ import {
   Divider,
   Button
 } from "react-semantify"
-import OnBoardingHeader from './onboardingHeader';
-import OnBoardingContent from './OnBoardingContent';
+import OnBoardingModal from './OnBoardingModal';
+import OnBoardingPage from './OnBoardingPage';
 require('../semantic-ui/dist/semantic.min.css');
 require('../semantic-ui/dist/semantic.min.js');
 
@@ -41,7 +41,7 @@ class OnBoardingSkeleton extends Component {
     $('.ui.modal.newOnboarding')
       .modal({
         selector:{
-          close:'icon.close'
+          close:'.close'
         }
       })
       .modal('show');
@@ -49,32 +49,12 @@ class OnBoardingSkeleton extends Component {
 
 
   render(){
-    const {children, title, subtitle, filter, limit, content, displayContent} = this.props
+    const{display='modal'} = this.props
     return(
       <div>
         <div className="ui main containers">
-         <div onClick={this.openModal}>Open Modal</div>
-         <div className="ui modal newOnboarding">
-
-                <i className="close icon"></i>
-                <OnBoardingHeader title={title} subTitle={subtitle}></OnBoardingHeader>
-
-                <OnBoardingContent content = {content} displayContent={displayContent} ></OnBoardingContent>
-                <div className="actions">
-                    <div className="ui  left labeled icon button" onClick={this.props.pre}>
-                      Pre
-                      <i className="left arrow icon"></i>
-                    </div>
-                    <div className="ui  right labeled icon button" onClick={this.props.next}>
-                      Next
-                      <i className="right arrow icon"></i>
-                    </div>
-                </div>
-
-          </div>
-      </div>
-
-
+        {display==="page"?<OnBoardingPage {...this.props}/>:<OnBoardingModal {...this.props}/>}
+        </div>
     </div>
     )
   }
