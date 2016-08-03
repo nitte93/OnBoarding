@@ -3,20 +3,20 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var Extract = require('extract-text-webpack-plugin')
+
 
 
 module.exports = {
-  devtool:'cheap-module-eval-source-map',
+  devtool:'cheap-module-source-map',
   entry:{
-      examples:[
-           'webpack-hot-middleware/client?reload=true',
-           path.join(__dirname, 'src/examples')
-      ],
-      autocomplete: path.join(__dirname, 'src')
+      'examples.min': path.join(__dirname, 'src/examples'),
+      'onBoarding':path.join(__dirname,'src'),
+      'onBoarding.min':path.join(__dirname,'src')
   },
   output:{
     path:path.join(__dirname, '/build/'),
-    filename: '[name].dev.js',
+    filename: '[name].js',
     publicPath: '/'
   },
   plugins: [
@@ -26,14 +26,18 @@ module.exports = {
      filename: 'index.html'
    }),
    new webpack.optimize.OccurenceOrderPlugin(),
-   new webpack.HotModuleReplacementPlugin(),
    new webpack.NoErrorsPlugin(),
    new webpack.DefinePlugin({
-     'process.env.NODE_ENV': JSON.stringify('development')
+     'process.env.NODE_ENV': JSON.stringify('production')
    }),
+   new webpack.optimize.UglifyJsPlugin({
+     compressor: { warnings: false },
+     include: /\.min\./,
+   }),
+   new Extract('styles.min.bundle.css'),
    new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery"
+      $: "jquery",
+      jQuery: "jquery"
   })
  ],
  module: {
